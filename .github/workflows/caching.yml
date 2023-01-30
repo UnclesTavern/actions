@@ -1,0 +1,25 @@
+name: Caching
+on:
+  workflow_dispatch:
+
+jobs:
+  show_caching:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Cache Primes
+        id: cache-primes
+        uses: actions/cache@v3
+        with:
+          path: primes
+          key: ${{ runner.os }}-primes
+      
+      - name: Generate Prime Numbers
+        if: steps.chache-primes.outputs.cache-hit != 'true'
+        run: |
+          sleep 60
+          echo "1 2 3..." > primes
+      
+      - name: Use Prime Numbers
+        run: cat primes
