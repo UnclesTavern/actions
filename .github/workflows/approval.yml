@@ -1,0 +1,24 @@
+name: approval workflos
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: building app
+      run: echo "building"
+    
+  dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    needs: [build]
+    steps:
+      - run: echo "deving"
+    
+  test:
+    runs-on: ubuntu-latest
+    environment: rob
+    needs: [build, dev]
+    steps:
+      - run: echo "testing"
