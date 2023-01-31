@@ -1,4 +1,4 @@
-name: approval workflos
+name: approval workflows
 on: 
   workflow_dispatch:
 
